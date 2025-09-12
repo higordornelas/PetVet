@@ -44,8 +44,8 @@
     <input type="text" id="petBreed" placeholder="Raça">
     <label for="petSex">Sexo:</label>
     <select id="petSex" name="sexo" required>
-        <option value="masculino">Masculino</option>
-        <option value="feminino">Feminino</option>
+        <option value="Masculino">Masculino</option>
+        <option value="Feminino">Feminino</option>
     </select><br>
     <input type="number" id="petAge" placeholder="Idade">
     <input type="text" id="petHistory" placeholder="Histórico Médico">
@@ -287,9 +287,9 @@ window.addEventListener("DOMContentLoaded", loadPetsAndProcedures, loadProducts,
     clientForm.onsubmit = e => { e.preventDefault(); const dto={name:clientName.value,document:clientDocument.value,phone:clientPhone.value,address:clientAddress.value,email:clientEmail.value}; const id=clientId.value; saveData(id?`${API.clients}/${id}`:API.clients,id?"PUT":"POST",dto,loadClients); clientForm.reset(); };
     function editClient(c){clientId.value=c.id;clientName.value=c.name;clientDocument.value=c.document;clientPhone.value=c.phone;clientAddress.value=c.address;clientEmail.value=c.email;}
 
-    function loadPets() { fetchData(API.pets, "petsTable", p => `<tr><td>${p.id}</td><td>${p.name}</td><td>${p.breed||""}</td><td>${p.sex||""}</td><td>${p.age||""}</td><td>${p.ownerId||""}</td><td><button onclick='editPet(${JSON.stringify(p)})'>Editar</button><button onclick='deleteData("${API.pets}/${p.id}", loadPets)'>Excluir</button></td></tr>`); }
-    petForm.onsubmit = e => { e.preventDefault(); const dto={name:petName.value,breed:petBreed.value,sex:petSex.value,age:petAge.value,medicalHistory:petHistory.value,ownerId:petOwnerId.value}; const id=petId.value; saveData(id?`${API.pets}/${id}`:API.pets,id?"PUT":"POST",dto,loadPets); loadPetsAndProcedures(); petForm.reset(); };
-    function editPet(p){petId.value=p.id;petName.value=p.name;petBreed.value=p.breed;petSex.value=p.sex;petAge.value=p.age;petHistory.value=p.medicalHistory;petOwnerId.value=p.ownerId;}
+    function loadPets() { fetchData(API.pets, "petsTable", p => `<tr><td>${p.id}</td><td>${p.name}</td><td>${p.breed||""}</td><td>${p.gender||""}</td><td>${p.age||""}</td><td>${p.ownerId||""}</td><td><button onclick='editPet(${JSON.stringify(p)})'>Editar</button><button onclick='deleteData("${API.pets}/${p.id}", loadPets)'>Excluir</button></td></tr>`); }
+    petForm.onsubmit = e => { e.preventDefault(); const dto={name:petName.value,breed:petBreed.value,gender:petSex.value,age:petAge.value,medicalHistory:petHistory.value,ownerId:petOwnerId.value}; const id=petId.value; saveData(id?`${API.pets}/${id}`:API.pets,id?"PUT":"POST",dto,loadPets); loadPetsAndProcedures(); petForm.reset(); };
+    function editPet(p){petId.value=p.id;petName.value=p.name;petBreed.value=p.breed;petSex.value=p.gender;petAge.value=p.age;petHistory.value=p.medicalHistory;petOwnerId.value=p.ownerId;}
 
     function loadProducts() { fetchData(API.products, "productsTable", p => `<tr><td>${p.id}</td><td>${p.name}</td><td>${p.type||""}</td><td>${p.price}</td><td>${p.quantity}</td><td><button onclick='editProduct(${JSON.stringify(p)})'>Editar</button><button onclick='deleteData("${API.products}/${p.id}", loadProducts)'>Excluir</button></td></tr>`); }
     productForm.onsubmit = e => { e.preventDefault(); const dto={name:productName.value,description:productDescription.value,type:productType.value,price:parseFloat(productPrice.value),quantity:parseInt(productQuantity.value)}; const id=productId.value; saveData(id?`${API.products}/${id}`:API.products,id?"PUT":"POST",dto, () => { loadProducts(); loadProductsForCart()}); productForm.reset(); };
