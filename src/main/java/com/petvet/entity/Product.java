@@ -1,7 +1,9 @@
 package com.petvet.entity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Product {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;

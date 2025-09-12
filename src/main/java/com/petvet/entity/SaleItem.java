@@ -1,5 +1,6 @@
 package com.petvet.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,7 +10,8 @@ public class SaleItem {
     private Integer quantity;
     private Double price;
 
-    @ManyToOne private Sale sale;
+    @ManyToOne @JsonBackReference
+    private Sale sale;
     @ManyToOne private Product product;
 
     public Long getId() {

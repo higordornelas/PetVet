@@ -1,9 +1,9 @@
 package com.petvet.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,8 +13,9 @@ public class Sale {
     private LocalDate date;
     private Double total;
 
-    @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL)
-    private List<SaleItem> items = new ArrayList<>();
+    @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private List<SaleItem> items;
 
     public Long getId() {
         return id;

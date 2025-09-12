@@ -48,6 +48,7 @@ public class SaleService {
             saleItem.setProduct(product);
             saleItem.setQuantity(itemDTO.getQuantity());
             saleItem.setPrice(product.getPrice());
+            saleItem.setSale(sale);
             sale.getItems().add(saleItem);
 
             total += product.getPrice() * itemDTO.getQuantity();
