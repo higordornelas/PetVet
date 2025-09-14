@@ -9,7 +9,7 @@ PetVet é uma aplicação para web para gerenciamento de uma clínica veterinár
     - Pets
     - Produtos
     - Procedimentos
-    - Histórico de procedimentos
+    - Procedimentos Realizados
 
 
 - Vendas
@@ -27,15 +27,16 @@ PetVet é uma aplicação para web para gerenciamento de uma clínica veterinár
 
 ## Tecnologias utilizadas
 
-- HTML, CSS e JavaScript puro (front-end)
-- API REST para backend (Java/Spring ou outra implementação)
+- HTML e JavaScript (front-end)
+- API REST (Java/Spring)
 - Fetch API para comunicação com o backend
+- MySQL para banco de dados
 
 ## Como usar
 
 1. Abra o arquivo `index.html` no navegador.
 2. Na tela inicial, escolha entre:
-    - **Cadastro**: gerencie clientes, pets, produtos, procedimentos e histórico.
+    - **Cadastro**: gerencie clientes, pets, produtos, procedimentos disponíveis e procedimentos realizados.
     - **Vendas**: selecione produtos, adicione ao carrinho e finalize vendas.
 3. Utilize os botões de ação para editar ou excluir registros.
 4. O sistema atualiza automaticamente os dados cadastrados e o estoque.
