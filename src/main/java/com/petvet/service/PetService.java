@@ -54,7 +54,10 @@ public class PetService {
         dto.setBreed(pet.getBreed());
         dto.setGender(pet.getGender());
         dto.setAge(pet.getAge());
-        if (pet.getOwner() != null) dto.setOwnerId(pet.getOwner().getId());
+        if (pet.getOwner() != null) {
+            dto.setOwnerId(pet.getOwner().getId());
+            dto.setOwnerName(pet.getOwner().getName());
+        }
         return dto;
     }
 

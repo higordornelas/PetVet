@@ -88,7 +88,7 @@
     <select id="historyProcedureId" required></select><br>
     <button type="submit">Salvar Histórico</button>
 </form>
-<table id="historiesTable"><thead><tr><th>ID</th><th>Data</th><th>Veterinário</th><th>Preço</th><th>Pet</th><th>Procedimento</th><th>Ações</th></tr></thead><tbody></tbody></table>
+<table id="historiesTable"><thead><tr><th>ID</th><th>Data</th><th>Veterinário</th><th>Preço</th><th>Pet</th><th>Procedimento</th><th>Observações</th><th>Ações</th></tr></thead><tbody></tbody></table>
 
 <h2>Registrar Venda</h2>
 <table>
@@ -288,7 +288,7 @@ window.addEventListener("DOMContentLoaded", loadPetsAndProcedures, loadProducts,
     clientForm.onsubmit = e => { e.preventDefault(); const dto={name:clientName.value,document:clientDocument.value,phone:clientPhone.value,address:clientAddress.value,email:clientEmail.value}; const id=clientId.value; saveData(id?`${API.clients}/${id}`:API.clients,id?"PUT":"POST",dto,loadClients); clientForm.reset(); };
     function editClient(c){clientId.value=c.id;clientName.value=c.name;clientDocument.value=c.document;clientPhone.value=c.phone;clientAddress.value=c.address;clientEmail.value=c.email;}
 
-    function loadPets() { fetchData(API.pets, "petsTable", p => `<tr><td>${p.id}</td><td>${p.name}</td><td>${p.breed||""}</td><td>${p.gender||""}</td><td>${p.age||""}</td><td>${p.ownerId||""}</td><td><button onclick='editPet(${JSON.stringify(p)})'>Editar</button><button onclick='deleteData("${API.pets}/${p.id}", loadPets)'>Excluir</button></td></tr>`); }
+    function loadPets() { fetchData(API.pets, "petsTable", p => `<tr><td>${p.id}</td><td>${p.name}</td><td>${p.breed||""}</td><td>${p.gender||""}</td><td>${p.age||""}</td><td>${p.ownerName||""}</td><td><button onclick='editPet(${JSON.stringify(p)})'>Editar</button><button onclick='deleteData("${API.pets}/${p.id}", loadPets)'>Excluir</button></td></tr>`); }
     petForm.onsubmit = e => { e.preventDefault(); const dto={name:petName.value,breed:petBreed.value,gender:petSex.value,age:petAge.value,medicalHistory:petHistory.value,ownerId:petOwnerId.value}; const id=petId.value; saveData(id?`${API.pets}/${id}`:API.pets,id?"PUT":"POST",dto,loadPets); loadPetsAndProcedures(); petForm.reset(); };
     function editPet(p){petId.value=p.id;petName.value=p.name;petBreed.value=p.breed;petSex.value=p.gender;petAge.value=p.age;petHistory.value=p.medicalHistory;petOwnerId.value=p.ownerId;}
 
@@ -300,7 +300,7 @@ window.addEventListener("DOMContentLoaded", loadPetsAndProcedures, loadProducts,
     procedureForm.onsubmit = e => { e.preventDefault(); const dto={name:procedureName.value,description:procedureDescription.value,price:parseFloat(procedurePrice.value)}; const id=procedureId.value; saveData(id?`${API.procedures}/${id}`:API.procedures,id?"PUT":"POST",dto,loadProcedures); procedureForm.reset(); loadPetsAndProcedures(); };
     function editProcedure(p){procedureId.value=p.id;procedureName.value=p.name;procedureDescription.value=p.description;procedurePrice.value=p.price;}
 
-    function loadHistories() { fetchData(API.histories, "historiesTable", h => `<tr><td>${h.id}</td><td>${h.date}</td><td>${h.veterinarian||""}</td><td>${h.price}</td><td>${h.pet.name||""}</td><td>${h.procedure.name||""}</td><td><button onclick='editHistory(${JSON.stringify(h)})'>Editar</button><button onclick='deleteData("${API.histories}/${h.id}", loadHistories)'>Excluir</button></td></tr>`); }
+    function loadHistories() { fetchData(API.histories, "historiesTable", h => `<tr><td>${h.id}</td><td>${h.date}</td><td>${h.veterinarian||""}</td><td>${h.price}</td><td>${h.pet.name||""}</td><td>${h.procedure.name||""}</td><td>${h.notes||""}</td><td><button onclick='editHistory(${JSON.stringify(h)})'>Editar</button><button onclick='deleteData("${API.histories}/${h.id}", loadHistories)'>Excluir</button></td></tr>`); }
     historyForm.onsubmit = e => { e.preventDefault(); const dto={date:historyDate.value,veterinarian:historyVet.value,notes:historyNotes.value,pet:{ id: parseInt(historyPetId.value) },procedure:{ id: parseInt(historyProcedureId.value) }}; const id=historyId.value; saveData(id?`${API.histories}/${id}`:API.histories,id?"PUT":"POST",dto,loadHistories); historyForm.reset(); };
     function editHistory(h){historyId.value=h.id;historyDate.value=h.date;historyVet.value=h.veterinarian;historyNotes.value=h.notes;historyPetId.value=h.pet;historyProcedureId.value=h.procedure;}
 

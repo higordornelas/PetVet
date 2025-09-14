@@ -30,6 +30,7 @@ public class ProcedureService {
         Procedure proc = repo.findById(id).orElseThrow(() -> new RuntimeException("Procedimento não encontrado"));
         proc.setName(dto.getName());
         proc.setPrice(dto.getPrice());
+        proc.setDescription(dto.getDescription());
         return toDTO(repo.save(proc));
     }
 
@@ -39,6 +40,7 @@ public class ProcedureService {
         ProcedureDTO dto = new ProcedureDTO();
         dto.setId(proc.getId());
         dto.setName(proc.getName());
+        dto.setDescription(proc.getDescription());
         dto.setPrice(proc.getPrice());
         return dto;
     }
@@ -47,6 +49,7 @@ public class ProcedureService {
         Procedure proc = new Procedure();
         proc.setName(dto.getName());
         proc.setPrice(dto.getPrice());
+        proc.setDescription(dto.getDescription());
         return proc;
     }
 }

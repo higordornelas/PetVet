@@ -45,6 +45,7 @@ public class ProcedureHistoryService {
         ph.setPet(pet);
         ph.setProcedure(procedure);
         ph.setPrice(procedure.getPrice());
+        ph.setNotes(dto.getNotes());
 
         return toDTO(repo.save(ph));
     }
